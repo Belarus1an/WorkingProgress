@@ -12,12 +12,10 @@ public class Worker {
     private int workerID;
     private String name;
     private int pesel;
-    private int orderID;
 
-    public Worker(String name, int pesel, int orderID) {
+    public Worker(String name, int pesel) {
         this.name = name;
         this.pesel = pesel;
-        this.orderID = orderID;
     }
 
     public int getWorkerID() {
@@ -30,9 +28,5 @@ public class Worker {
 
     public int getPesel() {
         return pesel;
-    }
-
-    public int getOrderID() {
-        return orderID;
     }
 }

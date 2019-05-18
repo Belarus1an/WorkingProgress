@@ -5,6 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Test</h1>
+<div>
+    <table class="table">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">pesel</th>
+        </tr>
+        <tr scope="col" th:each ="worker : ${workers}">
+            <td th:utext="${worker.workerID}">...</td>
+            <td th:utext="${worker.name}">...</td>
+            <td th:utext="${worker.pesel}">...</td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
