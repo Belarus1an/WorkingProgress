@@ -5,7 +5,7 @@ import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,13 +14,28 @@ import java.util.List;
 public class WorkerController {
 
     @Autowired
-    WorkerRepo workerRepo;
+    private WorkerRepo workerRepo;
 
     @RequestMapping("/")
     public String index(ModelMap modelMap){
 
-        List<Worker> workerList = workerRepo.ALL_WORKER;
-        modelMap.put("workers", workerList);
+        return "index";
+    }
+
+    @GetMapping("/addWorker")
+    public String addWorker(ModelMap modelMap){
+
+        return "addWorker";
+    }
+
+    @PostMapping("addWorker")
+    public  String createWorker(@RequestBody String nameWorker, @RequestParam int pesel, ModelMap modelMap){
+
+        Worker newWorker = new Worker(nameWorker, pesel);
+        workerRepo.save(newWorker);
+        List<Worker> workerList = workerRepo.findAll();
+
+        modelMap.put("workerList", workerList);
 
         return "index";
     }
