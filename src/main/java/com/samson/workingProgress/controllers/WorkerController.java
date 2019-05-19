@@ -19,7 +19,10 @@ public class WorkerController {
     @RequestMapping("/")
     public String index(ModelMap modelMap){
 
-        return "index";
+        List<Worker> workerList = workerRepo.findAll();
+        modelMap.put("workerList", workerList);
+
+        return "workers";
     }
 
     @GetMapping("/addWorker")
@@ -28,8 +31,8 @@ public class WorkerController {
         return "addWorker";
     }
 
-    @PostMapping("addWorker")
-    public  String createWorker(@RequestBody String nameWorker, @RequestParam int pesel, ModelMap modelMap){
+    @PostMapping("/addWorker")
+    public  String createWorker(@RequestParam String nameWorker, @RequestParam int pesel, ModelMap modelMap){
 
         Worker newWorker = new Worker(nameWorker, pesel);
         workerRepo.save(newWorker);
@@ -37,6 +40,6 @@ public class WorkerController {
 
         modelMap.put("workerList", workerList);
 
-        return "index";
+        return "workers";
     }
 }
