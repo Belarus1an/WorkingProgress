@@ -23,11 +23,13 @@
                 <th scope="col">ID</th>
                 <th scope="col">Imię</th>
                 <th scope="col">PESEL</th>
+                <th scope="col">---</th>
             </tr>
             <tr scope="col" th:each ="worker : ${workerList}">
                 <td th:utext="${worker.workerID}">...</td>
                 <td th:utext="${worker.workerName}">...</td>
                 <td th:utext="${worker.pesel}">...</td>
+                <td> <a th:href="@{'/delete/' + ${worker.workerID}}">Delete</a></td>
             </tr>
         </table>
     </div>

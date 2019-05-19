@@ -36,4 +36,13 @@ public class WorkerController {
 
         return "workers";
     }
+
+    @GetMapping("/delete/{workerID}")
+    public String deleteWorker(@PathVariable int workerID){
+
+        Worker worker = workerRepo.findById(workerID).get();
+        workerRepo.delete(worker);
+
+        return "redirect:/workers";
+    }
 }
