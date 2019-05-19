@@ -16,8 +16,8 @@ public class WorkerController {
     @Autowired
     private WorkerRepo workerRepo;
 
-    @RequestMapping("/")
-    public String index(ModelMap modelMap){
+    @RequestMapping("/workers")
+    public String showWorkers(ModelMap modelMap){
 
         List<Worker> workerList = workerRepo.findAll();
         modelMap.put("workerList", workerList);
@@ -25,16 +25,15 @@ public class WorkerController {
         return "workers";
     }
 
-    @GetMapping("/addWorker")
-    public String addWorker(ModelMap modelMap){
+//    @GetMapping("/addWorker")
+//    public String addWorker(ModelMap modelMap){
+//        return "addWorker";
+//    }
 
-        return "addWorker";
-    }
+    @PostMapping("/workers")
+    public  String createWorker(@RequestParam String workerName, @RequestParam int pesel, ModelMap modelMap){
 
-    @PostMapping("/addWorker")
-    public  String createWorker(@RequestParam String nameWorker, @RequestParam int pesel, ModelMap modelMap){
-
-        Worker newWorker = new Worker(nameWorker, pesel);
+        Worker newWorker = new Worker(workerName, pesel);
         workerRepo.save(newWorker);
         List<Worker> workerList = workerRepo.findAll();
 

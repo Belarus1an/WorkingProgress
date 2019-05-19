@@ -7,8 +7,15 @@
 
     <title>Title</title>
 </head>
-<body>
-    <a th:href="@{/addWorker}">add Worker</a>
+<body class="px-5 py-3">
+
+    <div class="w-25 my-2">
+        <form  method="post">
+            <div class="my-2"><input  type="text" name="workerName" class="form-control" placeholder="Imię" aria-describedby="button-addon2"/></div>
+            <div class="my-2"><input type="text" name="pesel" class="form-control" placeholder="PESEL" aria-describedby="button-addon2"></div>
+            <button  class="btn btn-primary" type="submit">add</button>
+        </form>
+    </div>
 
     <div>
         <table class="table">
@@ -19,7 +26,7 @@
             </tr>
             <tr scope="col" th:each ="worker : ${workerList}">
                 <td th:utext="${worker.workerID}">...</td>
-                <td th:utext="${worker.nameWorker}">...</td>
+                <td th:utext="${worker.workerName}">...</td>
                 <td th:utext="${worker.pesel}">...</td>
             </tr>
         </table>
