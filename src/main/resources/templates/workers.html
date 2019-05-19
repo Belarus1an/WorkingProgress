@@ -11,18 +11,18 @@
 
     <div class="w-25 my-2">
         <form  method="post">
-            <div class="my-2"><input  type="text" name="workerName" class="form-control" placeholder="Imię" aria-describedby="button-addon2"/></div>
-            <div class="my-2"><input type="text" name="pesel" class="form-control" placeholder="PESEL" aria-describedby="button-addon2"></div>
-            <button  class="btn btn-primary" type="submit">add</button>
+            <div class="my-2"><input required type="text" name="workerName" class="form-control" placeholder="Imię" aria-describedby="button-addon2"/></div>
+            <div class="my-2"><input required type="text" name="pesel" class="form-control" placeholder="PESEL" aria-describedby="button-addon2"></div>
+            <button  class="btn btn-primary" type="submit">Dodaj pracownika</button>
         </form>
     </div>
 
     <div>
-        <table class="table">
+        <table class="table table-striped">
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">pesel</th>
+                <th scope="col">Imię</th>
+                <th scope="col">PESEL</th>
             </tr>
             <tr scope="col" th:each ="worker : ${workerList}">
                 <td th:utext="${worker.workerID}">...</td>

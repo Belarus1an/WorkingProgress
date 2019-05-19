@@ -26,12 +26,7 @@ public class TonerController {
         return "toners";
     }
 
-    @RequestMapping("/addToner")
-    public String addToner(){
-        return "addToner";
-    }
-
-    @PostMapping("/addToner")
+    @PostMapping("/toners")
     public String createToner(@RequestParam String tonerName, @RequestParam int points, ModelMap modelMap){
 
         Toner newToner = new Toner(tonerName, points);

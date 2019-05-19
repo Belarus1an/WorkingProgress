@@ -25,13 +25,8 @@ public class WorkerController {
         return "workers";
     }
 
-//    @GetMapping("/addWorker")
-//    public String addWorker(ModelMap modelMap){
-//        return "addWorker";
-//    }
-
     @PostMapping("/workers")
-    public  String createWorker(@RequestParam String workerName, @RequestParam int pesel, ModelMap modelMap){
+    public  String createWorker(@RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap){
 
         Worker newWorker = new Worker(workerName, pesel);
         workerRepo.save(newWorker);

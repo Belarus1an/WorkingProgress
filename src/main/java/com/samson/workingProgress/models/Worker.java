@@ -12,12 +12,12 @@ public class Worker {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int workerID;
     private String workerName;
-    private int pesel;
+    private String pesel;
 
     public Worker() {
     }
 
-    public Worker(String name, int pesel) {
+    public Worker(String name, String pesel) {
         this.workerName = name;
         this.pesel = pesel;
     }
@@ -30,7 +30,7 @@ public class Worker {
         return workerName;
     }
 
-    public int getPesel() {
+    public String getPesel() {
         return pesel;
     }
 }
