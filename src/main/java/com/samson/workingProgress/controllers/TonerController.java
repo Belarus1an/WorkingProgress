@@ -2,12 +2,11 @@ package com.samson.workingProgress.controllers;
 
 import com.samson.workingProgress.models.Repos.TonerRepo;
 import com.samson.workingProgress.models.Toner;
+import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +34,14 @@ public class TonerController {
         modelMap.put("tonerList", tonerList);
 
         return "toners";
+    }
+
+    @GetMapping("/deleteToner/{tonerID}")
+    public String deleteToner(@PathVariable int tonerID){
+
+        Toner toner = tonerRepo.findById(tonerID).get();
+        tonerRepo.delete(toner);
+
+        return "redirect:/toners";
     }
 }

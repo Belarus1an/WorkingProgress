@@ -23,11 +23,13 @@
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Points</th>
+                <th scope="col">---</th>
             </tr>
             <tr scope="col" th:each ="toner : ${tonerList}">
                 <td th:utext="${toner.tonerID}">...</td>
                 <td th:utext="${toner.tonerName}">...</td>
                 <td th:utext="${toner.points}">...</td>
+                <td><a th:href="@{'/deleteToner/' + ${toner.tonerID}}">Delete</a></td>
             </tr>
         </table>
     </div>

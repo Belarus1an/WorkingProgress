@@ -37,7 +37,7 @@ public class WorkerController {
         return "workers";
     }
 
-    @GetMapping("/delete/{workerID}")
+    @GetMapping("/deleteWorker/{workerID}")
     public String deleteWorker(@PathVariable int workerID){
 
         Worker worker = workerRepo.findById(workerID).get();
