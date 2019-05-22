@@ -9,7 +9,9 @@ import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class OrderController {
     @Autowired
     private WorkerRepo workerRepo;
 
-    @RequestMapping("/")
+    @RequestMapping("/orders")
     public String showOrders(ModelMap modelMap){
 
         List<Orders> orderList = orderRepo.findAll();
@@ -39,4 +41,15 @@ public class OrderController {
         return "orders";
     }
 
+    @PostMapping("/orders")
+    public String creatOrder(@RequestParam int workerID, @RequestParam int tonerID, @RequestParam String date, ModelMap modelMap){
+
+        Orders order = new Orders(workerID, tonerID, date);
+        orderRepo.save(order);
+        List<Orders> ordersList = orderRepo.findAll();
+
+        modelMap.put("ordersList", ordersList);
+
+        return "redirect:/orders";
+    }
 }
