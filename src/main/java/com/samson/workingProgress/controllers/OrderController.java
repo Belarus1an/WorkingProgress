@@ -50,7 +50,7 @@ public class OrderController {
         Worker worker = workerRepo.findById(workerID).get();
         Toner toner = tonerRepo.findById(tonerID).get();
 
-        Orders orders = new Orders(worker.getWorkerName(), toner.getTonerName(), date);
+        Orders orders = new Orders(worker.getWorkerID(), worker.getWorkerName(), toner.getTonerName(), date);
         orderRepo.save(orders);
         List<Orders> ordersList = orderRepo.findAll();
 

@@ -1,6 +1,10 @@
 package com.samson.workingProgress.controllers;
 
+import com.samson.workingProgress.models.Orders;
+import com.samson.workingProgress.models.Repos.OrderRepo;
+import com.samson.workingProgress.models.Repos.TonerRepo;
 import com.samson.workingProgress.models.Repos.WorkerRepo;
+import com.samson.workingProgress.models.Toner;
 import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,12 @@ public class WorkerController {
 
     @Autowired
     private WorkerRepo workerRepo;
+
+    @Autowired
+    private OrderRepo orderRepo;
+
+    @Autowired
+    private TonerRepo tonerRepo;
 
     @RequestMapping("/workers")
     public String showWorkers(ModelMap modelMap){
@@ -44,5 +54,18 @@ public class WorkerController {
         workerRepo.delete(worker);
 
         return "redirect:/workers";
+    }
+
+    @GetMapping("/workerProgress/{workerID}")
+    public String showProgress(@PathVariable int workerID, ModelMap modelMap){
+
+        List<Orders> ordersList = orderRepo.findAll();
+        List<Toner> tonerList = tonerRepo.findAll();
+
+        int sumPoints = orderRepo.showProgress(ordersList, tonerList, workerID);
+
+        modelMap.put("sumPoints", sumPoints);
+
+        return "progress";
     }
 }
