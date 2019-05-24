@@ -7,44 +7,48 @@
 
     <title>Title</title>
 </head>
-<body>
-    <form  method="post">
-        <div class="my-2"><input required  type="text" name="date" class="form-control" placeholder="Date" aria-describedby="button-addon2"/></div>
-        <br>
-        <select name="workerID">
-            <option value=""> -- </option>
-            <option th:each="worker : ${workerList}"
-                    th:value="${worker.workerID}"
-                    th:utext="${worker.workerName}">
-            </option>
-        </select>
-        <select name="tonerID">
-            <option value=""> -- </option>
-            <option th:each="toner : ${tonerList}"
-                    th:value="${toner.tonerID}"
-                    th:utext="${toner.tonerName}">
-            </option>
-        </select>
-        <button class="btn btn-primary" type="submit">Dodaj order</button>
-    </form>
+<body class="px-5 py-3">
 
-<div>
-    <table class="table table-striped">
-        <tr>
-            <th scope="col">orderID</th>
-            <th scope="col">workerName</th>
-            <th scope="col">tonerName</th>
-            <th scope="col">date</th>
-        </tr>
-        <tr scope="col" th:each ="orders : ${orderList}">
-            <td th:utext="${orders.orderID}">...</td>
-            <td th:utext="${orders.workerName}">...</td>
-            <td th:utext="${orders.tonerName}">...</td>
-            <td th:utext="${orders.date}">...</td>
-        </tr>
-    </table>
+    <div class="w-25 my-2">
+        <form  method="post">
 
-</div>
+            <div class="my-1"><input required  type="text" name="Date" class="form-control" placeholder="Data..." aria-describedby="button-addon2"/></div>
+
+            <select name="workerID" class="custom-select my-1" required>
+                <option selected>Pracownik...</option>
+                <option th:each="worker : ${workerList}"
+                        th:value="${worker.workerID}"
+                        th:utext="${worker.workerName}">
+                </option>
+            </select>
+
+            <select name="tonerID" class="custom-select my-1" required>
+                <option selected>Toner...</option>
+                <option th:each="toner : ${tonerList}"
+                        th:value="${toner.tonerID}"
+                        th:utext="${toner.tonerName}">
+                </option>
+            </select>
+            <button class="btn btn-primary my-1" type="submit">Dodaj order</button>
+        </form>
+    </div>
+
+    <div>
+        <table class="table table-striped">
+            <tr>
+                <th scope="col">orderID</th>
+                <th scope="col">workerName</th>
+                <th scope="col">tonerName</th>
+                <th scope="col">date</th>
+            </tr>
+            <tr scope="col" th:each ="orders : ${orderList}">
+                <td th:utext="${orders.orderID}">...</td>
+                <td th:utext="${orders.workerName}">...</td>
+                <td th:utext="${orders.tonerName}">...</td>
+                <td th:utext="${orders.date}">...</td>
+            </tr>
+        </table>
+    </div>
 
 </body>
 </html>
