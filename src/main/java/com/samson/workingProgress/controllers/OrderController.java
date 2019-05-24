@@ -42,10 +42,16 @@ public class OrderController {
     }
 
     @PostMapping("/orders")
-    public String creatOrder(@RequestParam int workerID, @RequestParam int tonerID, @RequestParam String date, ModelMap modelMap){
+    public String createOrder(@RequestParam String date,
+                              @RequestParam int workerID,
+                              @RequestParam int tonerID,
+                                            ModelMap modelMap){
 
-        Orders order = new Orders(workerID, tonerID, date);
-        orderRepo.save(order);
+        Worker worker = workerRepo.findById(workerID).get();
+        Toner toner = tonerRepo.findById(tonerID).get();
+
+        Orders orders = new Orders(worker.getWorkerName(), toner.getTonerName(), date);
+        orderRepo.save(orders);
         List<Orders> ordersList = orderRepo.findAll();
 
         modelMap.put("ordersList", ordersList);

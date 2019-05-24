@@ -9,16 +9,16 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderID;
 
-    private int workerID;
-    private int tonerID;
+    private String workerName;
+    private String tonerName;
     private String date;
 
     public Orders() {
     }
 
-    public Orders(int workerID, int tonerID, String date) {
-        this.workerID = workerID;
-        this.tonerID = tonerID;
+    public Orders(String workerName, String tonerName, String date) {
+        this.workerName = workerName;
+        this.tonerName = tonerName;
         this.date = date;
     }
 
@@ -26,12 +26,12 @@ public class Orders {
         return orderID;
     }
 
-    public int getWorkerID() {
-        return workerID;
+    public String getWorkerName() {
+        return workerName;
     }
 
-    public int getTonerID() {
-        return tonerID;
+    public String getTonerName() {
+        return tonerName;
     }
 
     public String getDate() {

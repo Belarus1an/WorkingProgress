@@ -32,17 +32,18 @@
     <table class="table table-striped">
         <tr>
             <th scope="col">orderID</th>
-            <th scope="col">workerID</th>
-            <th scope="col">tonerID</th>
+            <th scope="col">workerName</th>
+            <th scope="col">tonerName</th>
             <th scope="col">date</th>
         </tr>
         <tr scope="col" th:each ="orders : ${orderList}">
             <td th:utext="${orders.orderID}">...</td>
-            <td th:utext="${orders.workerID}">...</td>
-            <td th:utext="${orders.tonerID}">...</td>
+            <td th:utext="${orders.workerName}">...</td>
+            <td th:utext="${orders.tonerName}">...</td>
             <td th:utext="${orders.date}">...</td>
         </tr>
     </table>
+
 </div>
 
 </body>
