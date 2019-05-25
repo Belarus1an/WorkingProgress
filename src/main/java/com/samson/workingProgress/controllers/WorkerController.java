@@ -63,7 +63,9 @@ public class WorkerController {
         List<Toner> tonerList = tonerRepo.findAll();
 
         int sumPoints = orderRepo.showProgress(ordersList, tonerList, workerID);
+        String workerName = orderRepo.showNameWorker(ordersList, workerID);
 
+        modelMap.put("workerName", workerName);
         modelMap.put("sumPoints", sumPoints);
 
         return "progress";

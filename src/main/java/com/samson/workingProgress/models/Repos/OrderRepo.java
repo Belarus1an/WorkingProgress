@@ -29,4 +29,16 @@ public interface OrderRepo extends JpaRepository<Orders, Integer> {
         return sumPoints;
     }
 
+    default String showNameWorker(List<Orders> ordersList, int workerID){
+
+        String workerName = "";
+
+        for (Orders ordersValue: ordersList){
+            if (ordersValue.getWorkerID() == workerID){
+                workerName = ordersValue.getWorkerName();
+            }
+        }
+
+        return workerName;
+    }
 }
