@@ -13,6 +13,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
+                    <a class="nav-link" th:href="@{'/'}">home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
                     <a class="nav-link" th:href="@{'/workers/'}">workers<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
@@ -28,7 +31,9 @@
     <div class="w-25 my-2 px-5 py-3">
         <form  method="post">
 
-            <div class="my-1"><input required  type="text" name="date" class="form-control" placeholder="Data..." aria-describedby="button-addon2"/></div>
+            <!--<div class="my-1"><input required  type="text" name="date" class="form-control" placeholder="Data..." aria-describedby="button-addon2"/></div>-->
+
+            <div><input name="date" type="date" атрибуты></div>
 
             <select name="workerID" class="custom-select my-1" required>
                 <option selected>Pracownik...</option>
@@ -61,7 +66,7 @@
                 <td th:utext="${orders.orderID}">...</td>
                 <td th:utext="${orders.workerName}">...</td>
                 <td th:utext="${orders.tonerName}">...</td>
-                <td th:utext="${orders.date}">...</td>
+                <td th:utext="${#dates.format(orders.date, 'dd-MMM-yyyy')}">...</td>
             </tr>
         </table>
     </div>

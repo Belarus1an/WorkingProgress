@@ -7,12 +7,14 @@ import com.samson.workingProgress.models.Repos.WorkerRepo;
 import com.samson.workingProgress.models.Toner;
 import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -42,10 +44,10 @@ public class OrderController {
     }
 
     @PostMapping("/orders")
-    public String createOrder(@RequestParam String date,
-                              @RequestParam int workerID,
+    public String createOrder(@RequestParam int workerID,
                               @RequestParam int tonerID,
-                                            ModelMap modelMap){
+                              @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
+                              ModelMap modelMap){
 
         Worker worker = workerRepo.findById(workerID).get();
         Toner toner = tonerRepo.findById(tonerID).get();

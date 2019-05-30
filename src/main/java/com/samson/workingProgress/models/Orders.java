@@ -1,6 +1,7 @@
 package com.samson.workingProgress.models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Orders {
@@ -12,12 +13,12 @@ public class Orders {
     private int workerID;
     private String workerName;
     private String tonerName;
-    private String date;
+    private Date date;
 
     public Orders() {
     }
 
-    public Orders(int workerID, String workerName, String tonerName, String date) {
+    public Orders(int workerID, String workerName, String tonerName, Date date) {
         this.workerID = workerID;
         this.workerName = workerName;
         this.tonerName = tonerName;
@@ -40,7 +41,7 @@ public class Orders {
         return tonerName;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 }
