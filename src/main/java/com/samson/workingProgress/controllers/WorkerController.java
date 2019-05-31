@@ -7,10 +7,12 @@ import com.samson.workingProgress.models.Repos.WorkerRepo;
 import com.samson.workingProgress.models.Toner;
 import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -56,20 +58,14 @@ public class WorkerController {
         return "redirect:/workers";
     }
 
-    @GetMapping("/workerProgress/{workerID}")
-    public String showProgress(@PathVariable int workerID, ModelMap modelMap){
+    @GetMapping("/progressDetails/{workerID}")
+    public String showProgressDetails(@PathVariable int workerID, ModelMap modelMap){
 
         List<Orders> ordersList = orderRepo.findAll();
-        List<Toner> tonerList = tonerRepo.findAll();
+        List<Orders> ordersListProgress = orderRepo.showListProgress(ordersList, workerID);
 
-        int sumPoints = orderRepo.showProgress(ordersList, tonerList, workerID);
-        double sumSalary = sumPoints * 0.50;
-        String workerName = orderRepo.showNameWorker(ordersList, workerID);
+        modelMap.put("ordersListProgress", ordersListProgress);
 
-        modelMap.put("workerName", workerName);
-        modelMap.put("sumPoints", sumPoints);
-        modelMap.put("sumSalary", sumSalary);
-
-        return "progress";
+        return "progressDetails";
     }
 }

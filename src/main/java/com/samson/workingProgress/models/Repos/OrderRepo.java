@@ -2,10 +2,10 @@ package com.samson.workingProgress.models.Repos;
 
 import com.samson.workingProgress.models.Orders;
 import com.samson.workingProgress.models.Toner;
-import com.samson.workingProgress.models.Worker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -40,5 +40,17 @@ public interface OrderRepo extends JpaRepository<Orders, Integer> {
         }
 
         return workerName;
+    }
+
+    default List<Orders> showListProgress(List<Orders> ordersList, int workerID){
+
+        List<Orders> newOrderList = new ArrayList<>();
+
+        for(Orders value: ordersList){
+            if (value.getWorkerID() == workerID){
+                newOrderList.add(value);
+            }
+        }
+        return newOrderList;
     }
 }
