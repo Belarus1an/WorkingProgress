@@ -4,15 +4,11 @@ import com.samson.workingProgress.models.Orders;
 import com.samson.workingProgress.models.Repos.OrderRepo;
 import com.samson.workingProgress.models.Repos.TonerRepo;
 import com.samson.workingProgress.models.Repos.WorkerRepo;
-import com.samson.workingProgress.models.Toner;
 import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
 
 
@@ -24,9 +20,6 @@ public class WorkerController {
 
     @Autowired
     private OrderRepo orderRepo;
-
-    @Autowired
-    private TonerRepo tonerRepo;
 
     @RequestMapping("/workers")
     public String showWorkers(ModelMap modelMap){
