@@ -26,6 +26,11 @@ public class ProgressController {
                             @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date2,
                             ModelMap modelMap){
 
+        List<Orders> ordersList = orderRepo.findAll();
+        List<Orders> ordersWorkerList = orderRepo.showListProgress(ordersList, workerID);
+        List<Orders> ordersDateList = orderRepo.findByOrdersDate(ordersWorkerList, date1, date2);
+
+        modelMap.put("ordersListProgress", ordersDateList);
 
         return "progressDetails";
     }
