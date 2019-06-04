@@ -59,7 +59,10 @@ public class WorkerController {
         List<Orders> ordersList = orderRepo.findAll();
         List<Orders> ordersListProgress = orderRepo.showListProgress(ordersList, workerID);
 
+        Worker worker = workerRepo.findById(workerID).get();
+
         modelMap.put("ordersListProgress", ordersListProgress);
+        modelMap.put("workerName", worker.getWorkerName());
         modelMap.put("workerID", workerID);
 
         return "progressDetails";

@@ -2,6 +2,7 @@ package com.samson.workingProgress.controllers;
 
 import com.samson.workingProgress.models.Orders;
 import com.samson.workingProgress.models.Repos.OrderRepo;
+import com.samson.workingProgress.models.Repos.WorkerRepo;
 import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +21,9 @@ public class ProgressController {
     @Autowired
     OrderRepo orderRepo;
 
+    @Autowired
+    WorkerRepo workerRepo;
+
     @RequestMapping("/progressDetails/filter")
     public String showProgress(
             @ModelAttribute("workerID") int workerID,
@@ -31,7 +35,10 @@ public class ProgressController {
         List<Orders> ordersWorkerList = orderRepo.showListProgress(ordersList, workerID);
         List<Orders> ordersDateList = orderRepo.findByOrdersDate(ordersWorkerList, date1, date2);
 
+        Worker worker = workerRepo.findById(workerID).get();
+
         modelMap.put("ordersListProgress", ordersDateList);
+        modelMap.put("workerName", worker.getWorkerName());
 
         return "progressDetails";
     }

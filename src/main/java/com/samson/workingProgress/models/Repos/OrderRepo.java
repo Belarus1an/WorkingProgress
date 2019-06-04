@@ -62,7 +62,7 @@ public interface OrderRepo extends JpaRepository<Orders, Integer> {
         List<Orders> newOrdersList = new ArrayList<>();
 
         for (Orders value: ordersWorkerList){
-            if (value.getDate().after(date1) && value.getDate().before(date2)){
+            if (!value.getDate().before(date1) && !value.getDate().after(date2)){
                 newOrdersList.add(value);
             }
         }
