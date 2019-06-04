@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 
 @Controller
+@SessionAttributes("workerID")
 public class WorkerController {
 
     @Autowired
@@ -51,13 +53,14 @@ public class WorkerController {
         return "redirect:/workers";
     }
 
-    @GetMapping("/progressDetails/{workerID}")
+    @RequestMapping("/progressDetails/{workerID}")
     public String showProgressDetails(@PathVariable int workerID, ModelMap modelMap){
 
         List<Orders> ordersList = orderRepo.findAll();
         List<Orders> ordersListProgress = orderRepo.showListProgress(ordersList, workerID);
 
         modelMap.put("ordersListProgress", ordersListProgress);
+        modelMap.put("workerID", workerID);
 
         return "progressDetails";
     }
