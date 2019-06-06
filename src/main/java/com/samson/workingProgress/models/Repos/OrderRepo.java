@@ -13,22 +13,17 @@ import java.util.List;
 @Repository
 public interface OrderRepo extends JpaRepository<Orders, Integer> {
 
-    List<Orders> findByDateBetween(Date from, Date to);
-
-    default int showProgress(List<Orders> ordersList, List<Toner> tonerList, int workerID){
+    default int showProgress(List<Orders> ordersList, List<Toner> tonerList){
 
         int sumPoints = 0;
 
         for (Orders valueOrders: ordersList){
-            if (valueOrders.getWorkerID() == workerID){
-                for (Toner valueToner: tonerList){
-                    if (valueToner.getTonerName().equals(valueOrders.getTonerName())){
-                        sumPoints += valueToner.getPoints();
-                    }
+            for (Toner valueToner: tonerList){
+                if (valueToner.getTonerName().equals(valueOrders.getTonerName())){
+                    sumPoints += valueToner.getPoints();
                 }
             }
         }
-
         return sumPoints;
     }
 
