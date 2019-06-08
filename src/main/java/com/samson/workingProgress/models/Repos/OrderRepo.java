@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 @Repository
 public interface OrderRepo extends JpaRepository<Orders, Integer> {
 
-    default int showProgress(List<Orders> ordersList, List<Toner> tonerList){
+    default int showProgress(Iterable<Orders> ordersList, Iterable<Toner> tonerList){
 
         int sumPoints = 0;
 
@@ -27,20 +26,7 @@ public interface OrderRepo extends JpaRepository<Orders, Integer> {
         return sumPoints;
     }
 
-    default String showNameWorker(List<Orders> ordersList, int workerID){
-
-        String workerName = "";
-
-        for (Orders ordersValue: ordersList){
-            if (ordersValue.getWorkerID() == workerID){
-                workerName = ordersValue.getWorkerName();
-            }
-        }
-
-        return workerName;
-    }
-
-    default List<Orders> showListProgress(List<Orders> ordersList, int workerID){
+    default List<Orders> showListProgress(Iterable<Orders> ordersList, int workerID){
 
         List<Orders> newOrderList = new ArrayList<>();
 
@@ -52,7 +38,7 @@ public interface OrderRepo extends JpaRepository<Orders, Integer> {
         return newOrderList;
     }
 
-    default List<Orders> findByOrdersDate(List<Orders> ordersWorkerList, Date date1, Date date2){
+    default List<Orders> findByOrdersDate(Iterable<Orders> ordersWorkerList, Date date1, Date date2){
 
         List<Orders> newOrdersList = new ArrayList<>();
 

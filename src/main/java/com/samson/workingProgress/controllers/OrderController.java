@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class OrderController {
@@ -32,9 +31,9 @@ public class OrderController {
     @RequestMapping("/orders")
     public String showOrders(ModelMap modelMap){
 
-        List<Orders> orderList = orderRepo.findAll();
-        List<Toner> tonerList = tonerRepo.findAll();
-        List<Worker> workerList = workerRepo.findAll();
+        Iterable<Orders> orderList = orderRepo.findAll();
+        Iterable<Toner> tonerList = tonerRepo.findAll();
+        Iterable<Worker> workerList = workerRepo.findAll();
 
         modelMap.put("orderList", orderList);
         modelMap.put("tonerList", tonerList);
@@ -54,7 +53,7 @@ public class OrderController {
 
         Orders orders = new Orders(worker.getWorkerID(), worker.getWorkerName(), toner.getTonerName(), date);
         orderRepo.save(orders);
-        List<Orders> ordersList = orderRepo.findAll();
+        Iterable<Orders> ordersList = orderRepo.findAll();
 
         modelMap.put("ordersList", ordersList);
 

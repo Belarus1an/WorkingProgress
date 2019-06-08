@@ -9,7 +9,6 @@ public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderID;
-
     private int workerID;
     private String workerName;
     private String tonerName;
