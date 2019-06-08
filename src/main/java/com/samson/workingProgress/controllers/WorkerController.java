@@ -25,7 +25,7 @@ public class WorkerController {
     @RequestMapping("/workers")
     public String showWorkers(ModelMap modelMap){
 
-        Iterable<Worker> workerList = workerRepo.findAll();
+        List<Worker> workerList = workerRepo.findAll();
         modelMap.put("workerList", workerList);
 
         return "workers";
@@ -36,7 +36,7 @@ public class WorkerController {
 
         Worker newWorker = new Worker(workerName, pesel);
         workerRepo.save(newWorker);
-        Iterable<Worker> workerList = workerRepo.findAll();
+        List<Worker> workerList = workerRepo.findAll();
 
         modelMap.put("workerList", workerList);
 
@@ -55,7 +55,7 @@ public class WorkerController {
     @RequestMapping("/progressDetails/{workerID}")
     public String showProgressDetails(@PathVariable int workerID, ModelMap modelMap){
 
-        Iterable<Orders> ordersList = orderRepo.findAll();
+        List<Orders> ordersList = orderRepo.findAll();
         List<Orders> ordersListProgress = orderRepo.showListProgress(ordersList, workerID);
 
         Worker worker = workerRepo.findById(workerID).get();

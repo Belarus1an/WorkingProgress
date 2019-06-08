@@ -13,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @SessionAttributes("workerID")
@@ -34,16 +35,17 @@ public class ProgressController {
             @RequestParam("date2") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date2,
             ModelMap modelMap){
 
-        Iterable<Toner> tonerList = tonerRepo.findAll();
-        Iterable<Orders> ordersList = orderRepo.findAll();
-        Iterable<Orders> ordersWorkerList = orderRepo.showListProgress(ordersList, workerID);
-        Iterable<Orders> ordersDateList = orderRepo.findByOrdersDate(ordersWorkerList, date1, date2);
+        List<Toner> tonerList = tonerRepo.findAll();
+        List<Orders> ordersList = orderRepo.findAll();
+        List<Orders> ordersWorkerList = orderRepo.showListProgress(ordersList, workerID);
+        List<Orders> ordersDateList = orderRepo.findByOrdersDate(ordersWorkerList, date1, date2);
 
         Worker worker = workerRepo.findById(workerID).get();
 
         int sumPoints = orderRepo.showProgress(ordersDateList, tonerList);
         float sumSalary = (float) (sumPoints * 0.5);
 
+        modelMap.put("tonersQuantity", ordersDateList.size());
         modelMap.put("sumPoints", sumPoints);
         modelMap.put("sumSalary", sumSalary);
         modelMap.put("ordersListProgress", ordersDateList);

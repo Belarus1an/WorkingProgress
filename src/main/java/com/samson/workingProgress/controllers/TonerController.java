@@ -2,7 +2,6 @@ package com.samson.workingProgress.controllers;
 
 import com.samson.workingProgress.models.Repos.TonerRepo;
 import com.samson.workingProgress.models.Toner;
-import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
