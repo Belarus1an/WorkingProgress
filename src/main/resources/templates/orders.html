@@ -9,29 +9,27 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{'/'}">home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{'/workers/'}">workers<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{'/toners/'}">toners<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{'/orders/'}">orders<span class="sr-only">(current)</span></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{'/'}">strona główna<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{'/workers/'}">pracownicy<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{'/toners/'}">tonery<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{'/orders/'}">zlecenia<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
     <div class="w-25 my-2 px-5 py-3">
         <form  method="post">
-
-            <!--<div class="my-1"><input required  type="text" name="date" class="form-control" placeholder="Data..." aria-describedby="button-addon2"/></div>-->
 
             <div class="my-1"><input required name="date" type="date" class="form-control" placeholder="Data..." aria-describedby="button-addon2"></div>
 
@@ -50,7 +48,7 @@
                         th:utext="${toner.tonerName}">
                 </option>
             </select>
-            <button class="btn btn-primary my-1" type="submit">Dodaj order</button>
+            <button class="btn btn-primary my-1" type="submit">Dodaj zlecenie</button>
         </form>
     </div>
 
