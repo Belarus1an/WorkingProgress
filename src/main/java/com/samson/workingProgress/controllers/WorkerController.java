@@ -34,12 +34,22 @@ public class WorkerController {
     @PostMapping("/workers")
     public  String createWorker(@RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap){
 
-        Worker newWorker = new Worker(workerName, pesel);
-        workerRepo.save(newWorker);
-        List<Worker> workerList = workerRepo.findAll();
+        List<Worker> oldWorkerList = workerRepo.findAll();
 
-        modelMap.put("workerList", workerList);
+        boolean checkPesel = workerRepo.checkWorkerPesel(pesel, oldWorkerList);
+        if (!checkPesel){
+            String infoNegative = "Nieprawidłowe wprowadzenie danych!";
+            modelMap.put("infoNegative", infoNegative);
+            modelMap.put("workerList", oldWorkerList);
+        } else {
+            Worker newWorker = new Worker(workerName, pesel);
+            workerRepo.save(newWorker);
+            String infoPositive = "Dodano do bazy";
 
+            List<Worker> newWorkerList = workerRepo.findAll();
+            modelMap.put("infoPositive", infoPositive);
+            modelMap.put("workerList", newWorkerList);
+        }
         return "workers";
     }
 
