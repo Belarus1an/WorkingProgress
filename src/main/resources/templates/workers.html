@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/img/css.css}" />
 
     <title>Title</title>
 </head>
@@ -30,8 +31,8 @@
 
     <div class="w-25 my-2 px-5 py-3">
         <form  method="post">
-            <div class="my-2"><input required type="text" name="workerName" class="form-control" placeholder="Imię" aria-describedby="button-addon2"/></div>
-            <div class="my-2"><input required type="text" name="pesel" class="form-control" placeholder="PESEL" aria-describedby="button-addon2"></div>
+            <div class="my-2"><input required type="text" name="workerName" class="form-control" placeholder="Imię i nazwisko" aria-describedby="button-addon2"/></div>
+            <div class="my-2"><input required type="text" name="pesel" class="form-control" placeholder="Pesel" aria-describedby="button-addon2"></div>
             <button  class="btn btn-primary" type="submit">Dodaj pracownika</button>
         </form>
     </div>
@@ -39,18 +40,24 @@
     <div class="px-5 py-3">
         <table class="table table-striped">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Imię</th>
-                <th scope="col">PESEL</th>
+                <th scope="col">Imię i nazwisko</th>
+                <th scope="col">Pesel</th>
                 <th scope="col">Wynik</th>
                 <th scope="col">Usuń</th>
             </tr>
             <tr scope="col" th:each ="worker : ${workerList}">
-                <td th:utext="${worker.workerID}">...</td>
                 <td th:utext="${worker.workerName}">...</td>
                 <td th:utext="${worker.pesel}">...</td>
-                <td><a th:href="@{'/progressDetails/' + ${worker.workerID}}">progress</a></td>
-                <td><a th:href="@{'/deleteWorker/' + ${worker.workerID}}">Usuń</a></td>
+                <td>
+                    <a th:href="@{'/progressDetails/' + ${worker.workerID}}">
+                        <img class="rowImg" th:src="@{'/img/info.png'}">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{'/deleteWorker/' + ${worker.workerID}}">
+                        <img class="rowImg" th:src="@{'/img/delete.png'}">
+                    </a>
+                </td>
             </tr>
         </table>
     </div>

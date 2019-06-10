@@ -1,0 +1,7 @@
+.rowImg {
+    opacity: 1;
+}
+
+.rowImg:hover {
+    opacity: 0.7;
+}
