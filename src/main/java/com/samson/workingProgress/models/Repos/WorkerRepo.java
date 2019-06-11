@@ -9,12 +9,12 @@ import java.util.List;
 @Repository
 public interface WorkerRepo extends JpaRepository<Worker, Integer> {
 
-   default boolean checkWorkerPesel(String pesel, List<Worker> oldWorkerList){
+   default boolean checkWorkerPesel(String pesel, List<Worker> workerList){
 
        if (pesel.length() != 12){
            return false;
        } else {
-           for (Worker workerValue: oldWorkerList){
+           for (Worker workerValue: workerList){
                if (workerValue.getPesel().equals(pesel)){
                    return false;
                }

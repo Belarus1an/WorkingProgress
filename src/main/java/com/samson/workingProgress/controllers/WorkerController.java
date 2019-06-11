@@ -7,8 +7,10 @@ import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -34,22 +36,40 @@ public class WorkerController {
     @PostMapping("/workers")
     public  String createWorker(@RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap){
 
-        List<Worker> oldWorkerList = workerRepo.findAll();
+        boolean checkPesel = workerRepo.checkWorkerPesel(pesel, workerRepo.findAll());
 
-        boolean checkPesel = workerRepo.checkWorkerPesel(pesel, oldWorkerList);
         if (!checkPesel){
             String infoNegative = "Nieprawidłowe wprowadzenie danych!";
             modelMap.put("infoNegative", infoNegative);
-            modelMap.put("workerList", oldWorkerList);
+            modelMap.put("workerList", workerRepo.findAll());
         } else {
             Worker newWorker = new Worker(workerName, pesel);
             workerRepo.save(newWorker);
             String infoPositive = "Dodano do bazy";
 
-            List<Worker> newWorkerList = workerRepo.findAll();
             modelMap.put("infoPositive", infoPositive);
-            modelMap.put("workerList", newWorkerList);
+            modelMap.put("workerList", workerRepo.findAll());
         }
+        return "workers";
+    }
+
+
+    @GetMapping("/edit/{workerID}")
+    public String showUpdateForm(@PathVariable("workerID") int workerID, ModelMap modelMap) {
+        Worker worker = workerRepo.findById(workerID).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + workerID));
+        modelMap.put("worker", worker);
+        return "updateWorker";
+    }
+
+    @PostMapping("/updateWorker/{workerID}")
+    public String updateUser(@PathVariable("workerID") int workerID, @RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap) {
+
+        Worker worker = workerRepo.findById(workerID).get();
+        worker.setWorkerName(workerName);
+        worker.setPesel(pesel);
+
+        workerRepo.save(worker);
+        modelMap.put("workerList", workerRepo.findAll());
         return "workers";
     }
 

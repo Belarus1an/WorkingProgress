@@ -33,4 +33,12 @@ public class Worker {
     public String getPesel() {
         return pesel;
     }
+
+    public void setWorkerName(String workerName) {
+        this.workerName = workerName;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel = pesel;
+    }
 }

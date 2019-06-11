@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/img/css.css}" />
+
+    <title>Title</title>
+</head>
+<body >
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{'/'}">strona główna<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{'/workers/'}">pracownicy<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{'/toners/'}">tonery<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{'/orders/'}">zlecenia<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="w-25 my-2 px-5 py-3">
+    <form method="post" th:action="@{/updateWorker/{id}(id=${worker.workerID})}">
+        <div class="my-2"><input required type="text" name="workerName" class="form-control" placeholder="Imię i nazwisko" aria-describedby="button-addon2"/></div>
+        <div class="my-2"><input required type="text" name="pesel" class="form-control" placeholder="Pesel" aria-describedby="button-addon2"></div>
+        <button  class="btn btn-primary" type="submit">Ok</button>
+    </form>
+</div>
+
+</body>
+</html>
