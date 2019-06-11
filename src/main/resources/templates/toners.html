@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/img/css.css}" />
 
     <title>Title</title>
 </head>
@@ -39,16 +40,24 @@
     <div  class="px-5 py-3">
         <table class="table table-striped">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Points</th>
-                <th scope="col">---</th>
+                <th scope="col">Model</th>
+                <th scope="col">Punkt</th>
+                <th scope="col">Zmienić</th>
+                <th scope="col">Usuń</th>
             </tr>
             <tr scope="col" th:each ="toner : ${tonerList}">
-                <td th:utext="${toner.tonerID}">...</td>
                 <td th:utext="${toner.tonerName}">...</td>
                 <td th:utext="${toner.points}">...</td>
-                <td><a th:href="@{'/deleteToner/' + ${toner.tonerID}}">Delete</a></td>
+                <td>
+                    <a  th:href="@{'/editToner/' + ${toner.tonerID}}">
+                        <img class="rowImg" th:src="@{'/img/update.png'}">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{'/deleteToner/' + ${toner.tonerID}}">
+                        <img class="rowImg" th:src="@{'/img/delete.png'}">
+                    </a>
+                </td>
             </tr>
         </table>
     </div>

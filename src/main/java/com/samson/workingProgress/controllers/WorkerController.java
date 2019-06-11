@@ -7,10 +7,7 @@ import com.samson.workingProgress.models.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.util.List;
 
 
@@ -34,7 +31,7 @@ public class WorkerController {
     }
 
     @PostMapping("/workers")
-    public  String createWorker(@RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap){
+    public  String addWorker(@RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap){
 
         boolean checkPesel = workerRepo.checkWorkerPesel(pesel, workerRepo.findAll());
 
@@ -54,9 +51,9 @@ public class WorkerController {
     }
 
 
-    @GetMapping("/edit/{workerID}")
+    @GetMapping("/editWorker/{workerID}")
     public String showUpdateForm(@PathVariable("workerID") int workerID, ModelMap modelMap) {
-        Worker worker = workerRepo.findById(workerID).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + workerID));
+        Worker worker = workerRepo.findById(workerID).get();
         modelMap.put("worker", worker);
         return "updateWorker";
     }
