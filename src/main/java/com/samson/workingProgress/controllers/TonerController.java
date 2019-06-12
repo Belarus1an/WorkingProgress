@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 public class TonerController {
 
@@ -18,19 +16,38 @@ public class TonerController {
     @RequestMapping("/toners")
     public String showToners(ModelMap modelMap){
 
-        List<Toner> tonerList = tonerRepo.findAll();
-        modelMap.put("tonerList", tonerList);
+        modelMap.put("tonerList", tonerRepo.findAll());
 
         return "toners";
     }
 
     @PostMapping("/toners")
-    public String createToner(@RequestParam String tonerName, @RequestParam int points, ModelMap modelMap){
+    public String addToner(@RequestParam String tonerName, @RequestParam int points, ModelMap modelMap){
 
-        Toner newToner = new Toner(tonerName, points);
-        tonerRepo.save(newToner);
-        List<Toner> tonerList = tonerRepo.findAll();
-        modelMap.put("tonerList", tonerList);
+        tonerRepo.save(new Toner(tonerName, points));
+        modelMap.put("tonerList", tonerRepo.findAll());
+
+        return "toners";
+    }
+
+    @GetMapping("/editToner/{tonerID}")
+    public String showUpdateForm(@PathVariable int tonerID, ModelMap modelMap){
+
+        modelMap.put("toner", tonerRepo.findById(tonerID).get());
+
+        return "updateToner";
+    }
+
+    @PostMapping("/updateToner/{tonerID}")
+    public String updateToner(@PathVariable int tonerID, @RequestParam String tonerName, @RequestParam int points,
+                              ModelMap modelMap){
+
+        Toner toner = tonerRepo.findById(tonerID).get();
+        toner.setTonerName(tonerName);
+        toner.setPoints(points);
+        tonerRepo.save(toner);
+
+        modelMap.put("tonerList", tonerRepo.findAll());
 
         return "toners";
     }
@@ -38,8 +55,7 @@ public class TonerController {
     @GetMapping("/deleteToner/{tonerID}")
     public String deleteToner(@PathVariable int tonerID){
 
-        Toner toner = tonerRepo.findById(tonerID).get();
-        tonerRepo.delete(toner);
+        tonerRepo.delete(tonerRepo.findById(tonerID).get());
 
         return "redirect:/toners";
     }

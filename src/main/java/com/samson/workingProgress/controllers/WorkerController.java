@@ -53,20 +53,23 @@ public class WorkerController {
 
     @GetMapping("/editWorker/{workerID}")
     public String showUpdateForm(@PathVariable("workerID") int workerID, ModelMap modelMap) {
+
         Worker worker = workerRepo.findById(workerID).get();
         modelMap.put("worker", worker);
+
         return "updateWorker";
     }
 
     @PostMapping("/updateWorker/{workerID}")
-    public String updateUser(@PathVariable("workerID") int workerID, @RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap) {
+    public String updateWorker(@PathVariable("workerID") int workerID, @RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap) {
 
         Worker worker = workerRepo.findById(workerID).get();
         worker.setWorkerName(workerName);
         worker.setPesel(pesel);
-
         workerRepo.save(worker);
+
         modelMap.put("workerList", workerRepo.findAll());
+
         return "workers";
     }
 

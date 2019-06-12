@@ -33,4 +33,12 @@ public class Toner {
     public int getPoints() {
         return points;
     }
+
+    public void setTonerName(String tonerName) {
+        this.tonerName = tonerName;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }
