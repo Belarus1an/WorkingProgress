@@ -1,6 +1,5 @@
 package com.samson.workingProgress.controllers;
 
-import com.samson.workingProgress.models.Orders;
 import com.samson.workingProgress.models.Repos.OrderRepo;
 import com.samson.workingProgress.models.Repos.WorkerRepo;
 import com.samson.workingProgress.models.Worker;
@@ -33,15 +32,14 @@ public class WorkerController {
     @PostMapping("/workers")
     public  String addWorker(@RequestParam String workerName, @RequestParam String pesel, ModelMap modelMap){
 
-        boolean checkPesel = workerRepo.checkWorkerPesel(pesel, workerRepo.findAll());
+//        boolean checkPesel = workerRepo.checkWorkerPesel(pesel, workerRepo.findAll());
 
-        if (!checkPesel){
+        if (!workerRepo.checkWorkerPesel(pesel, workerRepo.findAll())){
             String infoNegative = "Nieprawidłowe wprowadzenie danych!";
             modelMap.put("infoNegative", infoNegative);
             modelMap.put("workerList", workerRepo.findAll());
         } else {
-            Worker newWorker = new Worker(workerName, pesel);
-            workerRepo.save(newWorker);
+            workerRepo.save(new Worker(workerName, pesel));
             String infoPositive = "Dodano do bazy";
 
             modelMap.put("infoPositive", infoPositive);
@@ -54,8 +52,7 @@ public class WorkerController {
     @GetMapping("/editWorker/{workerID}")
     public String showUpdateForm(@PathVariable("workerID") int workerID, ModelMap modelMap) {
 
-        Worker worker = workerRepo.findById(workerID).get();
-        modelMap.put("worker", worker);
+        modelMap.put("worker", workerRepo.findById(workerID).get());
 
         return "updateWorker";
     }
@@ -76,8 +73,7 @@ public class WorkerController {
     @GetMapping("/deleteWorker/{workerID}")
     public String deleteWorker(@PathVariable int workerID){
 
-        Worker worker = workerRepo.findById(workerID).get();
-        workerRepo.delete(worker);
+        workerRepo.delete(workerRepo.findById(workerID).get());
 
         return "redirect:/workers";
     }
@@ -85,12 +81,9 @@ public class WorkerController {
     @RequestMapping("/progressDetails/{workerID}")
     public String showProgressDetails(@PathVariable int workerID, ModelMap modelMap){
 
-        List<Orders> ordersList = orderRepo.findAll();
-        List<Orders> ordersListProgress = orderRepo.showListProgress(ordersList, workerID);
-
         Worker worker = workerRepo.findById(workerID).get();
 
-        modelMap.put("ordersListProgress", ordersListProgress);
+        modelMap.put("ordersListProgress", orderRepo.showListProgress(orderRepo.findAll(), workerID));
         modelMap.put("workerName", worker.getWorkerName());
         modelMap.put("workerID", workerID);
 
