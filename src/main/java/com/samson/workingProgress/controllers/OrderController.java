@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -44,10 +42,10 @@ public class OrderController {
     }
 
     @PostMapping("/orders")
-    public String createOrder(@RequestParam int workerID,
-                              @RequestParam int tonerID,
-                              @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
-                              ModelMap modelMap){
+    public String addOrder(@RequestParam int workerID,
+                           @RequestParam int tonerID,
+                           @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
+                           ModelMap modelMap){
 
         Worker worker = workerRepo.findById(workerID).get();
         Toner toner = tonerRepo.findById(tonerID).get();
@@ -59,5 +57,29 @@ public class OrderController {
         modelMap.put("ordersList", ordersList);
 
         return "redirect:/orders";
+    }
+
+    @GetMapping("/editOrder/{orderID}")
+    public String showUpdateForm(@PathVariable int orderID, ModelMap modelMap){
+
+        modelMap.put("orders", orderRepo.findById(orderID).get());
+        modelMap.put("tonerList", tonerRepo.findAll());
+
+        return "updateOrder";
+    }
+
+    @PostMapping("/updateOrder/{orderID}")
+    public String updateWorker(@PathVariable("orderID") int orderID,
+                               @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date,
+                               @RequestParam int tonerID, ModelMap modelMap) {
+
+        Orders order = orderRepo.findById(orderID).get();
+        order.setDate(date);
+        order.setTonerName(tonerRepo.findById(tonerID).get().getTonerName());
+        orderRepo.save(order);
+
+        modelMap.put("orderList", orderRepo.findAll());
+
+        return "orders";
     }
 }

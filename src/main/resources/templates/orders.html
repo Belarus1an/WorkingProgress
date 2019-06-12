@@ -58,6 +58,7 @@
                 <th scope="col">orderID</th>
                 <th scope="col">workerName</th>
                 <th scope="col">tonerName</th>
+                <th scope="col">update</th>
                 <th scope="col">date</th>
             </tr>
             <tr scope="col" th:each ="orders : ${orderList}">
@@ -65,6 +66,11 @@
                 <td th:utext="${orders.workerName}">...</td>
                 <td th:utext="${orders.tonerName}">...</td>
                 <td th:utext="${#dates.format(orders.date, 'dd-MMM-yyyy')}">...</td>
+                <td>
+                    <a  th:href="@{'/editOrder/' + ${orders.orderID}}">
+                        <img class="rowImg" th:src="@{'/img/update.png'}">
+                    </a>
+                </td>
             </tr>
         </table>
     </div>

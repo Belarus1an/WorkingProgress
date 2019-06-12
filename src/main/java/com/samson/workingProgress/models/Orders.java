@@ -43,4 +43,16 @@ public class Orders {
     public Date getDate() {
         return date;
     }
+
+    public void setWorkerName(String workerName) {
+        this.workerName = workerName;
+    }
+
+    public void setTonerName(String tonerName) {
+        this.tonerName = tonerName;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }
