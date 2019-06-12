@@ -16,20 +16,40 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{'/'}">strona główna<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{'/'}">Strona główna<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{'/workers/'}">pracownicy<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{'/workers/'}">Pracownicy<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{'/toners/'}">tonery<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{'/toners/'}">Tonery<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{'/orders/'}">zlecenia<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{'/orders/'}">Zlecenia<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
 </nav>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Wybierz datę</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/progressDetails/filter" method="get">
+                    <div class="my-1"><input required name="date1" type="date" class="form-control" placeholder="Data..." aria-describedby="button-addon2"></div>
+                    <div class="my-1"><input required name="date2" type="date" class="form-control" placeholder="Data..." aria-describedby="button-addon2"></div>
+                    <button  class="btn btn-primary" type="submit">Ok</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
     <div class="w-60">
         <div class="px-5 py-3">
