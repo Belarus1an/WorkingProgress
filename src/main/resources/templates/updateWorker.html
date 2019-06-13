@@ -33,7 +33,7 @@
     <form method="post" th:action="@{/updateWorker/{id}(id=${worker.workerID})}">
         <div class="my-2"><input th:value="${worker.workerName}" required type="text" name="workerName" class="form-control" placeholder="Imię i nazwisko" aria-describedby="button-addon2"/></div>
         <div class="my-2"><input th:value="${worker.pesel}" required type="text" name="pesel" class="form-control" placeholder="Pesel" aria-describedby="button-addon2"></div>
-        <button  class="btn btn-primary" type="submit">Ok</button>
+        <button  class="btn btn-primary" type="submit">Zmień</button>
     </form>
 </div>
 

@@ -55,20 +55,24 @@
     <div class="px-5 py-3">
         <table class="table table-striped">
             <tr>
-                <th scope="col">orderID</th>
-                <th scope="col">workerName</th>
-                <th scope="col">tonerName</th>
-                <th scope="col">update</th>
-                <th scope="col">date</th>
+                <th scope="col">Imię pracownika</th>
+                <th scope="col">Model</th>
+                <th scope="col">Data</th>
+                <th scope="col">Zmień</th>
+                <th scope="col">Usuń</th>
             </tr>
             <tr scope="col" th:each ="orders : ${orderList}">
-                <td th:utext="${orders.orderID}">...</td>
                 <td th:utext="${orders.workerName}">...</td>
                 <td th:utext="${orders.tonerName}">...</td>
                 <td th:utext="${#dates.format(orders.date, 'dd-MMM-yyyy')}">...</td>
                 <td>
                     <a  th:href="@{'/editOrder/' + ${orders.orderID}}">
                         <img class="rowImg" th:src="@{'/img/update.png'}">
+                    </a>
+                </td>
+                <td>
+                    <a  th:href="@{'/deleteOrder/' + ${orders.orderID}}">
+                        <img class="rowImg" th:src="@{'/img/delete.png'}">
                     </a>
                 </td>
             </tr>

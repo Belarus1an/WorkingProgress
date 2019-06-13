@@ -33,7 +33,7 @@
     <form method="post" th:action="@{/updateToner/{id}(id=${toner.tonerID})}">
         <div class="my-2"><input th:value="${toner.tonerName}" required  type="text" name="tonerName" class="form-control" placeholder="Model tonera" aria-describedby="button-addon2"/></div>
         <div class="my-2"><input th:value="${toner.points}" required type="text" name="points" class="form-control" placeholder="Liczba punktów" aria-describedby="button-addon2"></div>
-        <button  class="btn btn-primary" type="submit">Ok</button>
+        <button  class="btn btn-primary" type="submit">Zmień</button>
     </form>
 </div>
 
