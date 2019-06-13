@@ -83,5 +83,14 @@ public class OrderController {
         return "orders";
     }
 
+    @RequestMapping("/deleteOrder/{orderID}")
+    public String deleteOrder(@PathVariable int orderID, ModelMap modelMap){
 
+        orderRepo.delete(orderRepo.findById(orderID).get());
+        modelMap.put("orderList", orderRepo.findAll());
+        modelMap.put("workerList", workerRepo.findAll());
+        modelMap.put("tonerList", tonerRepo.findAll());
+
+        return "redirect:/orders";
+    }
 }
