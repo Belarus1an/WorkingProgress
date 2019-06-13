@@ -5,3 +5,8 @@
 .rowImg:hover {
     opacity: 0.7;
 }
+
+.orderForm{
+    width: 300px;
+    height: 225px;
+}

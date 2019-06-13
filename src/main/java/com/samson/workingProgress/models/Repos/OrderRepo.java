@@ -50,4 +50,16 @@ public interface OrderRepo extends JpaRepository<Orders, Integer> {
         }
         return newOrdersList;
     }
+
+    default List<Orders> findOrdersByDate(List<Orders> all, Date date){
+
+        List<Orders> ordersList = new ArrayList<>();
+
+        for (Orders orderValue: all){
+            if (!orderValue.getDate().before(date) && !orderValue.getDate().after(date)){
+                ordersList.add(orderValue);
+            }
+        }
+        return ordersList;
+    }
 }

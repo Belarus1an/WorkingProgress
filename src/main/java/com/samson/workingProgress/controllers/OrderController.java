@@ -93,4 +93,12 @@ public class OrderController {
 
         return "redirect:/orders";
     }
+
+    @RequestMapping("/orders/filter")
+    public String findOrders(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date, ModelMap modelMap){
+
+        modelMap.put("orderList", orderRepo.findOrdersByDate(orderRepo.findAll(), date));
+
+        return "orders";
+    }
 }
