@@ -24,9 +24,16 @@ public class TonerController {
     @PostMapping("/toners")
     public String addToner(@RequestParam String tonerName, @RequestParam int points, ModelMap modelMap){
 
-        tonerRepo.save(new Toner(tonerName, points));
-        modelMap.put("tonerList", tonerRepo.findAll());
-
+        if (!tonerRepo.checkTonerName(tonerName, tonerRepo.findAll())){
+            String infoNegative = "Nieprawidłowe wprowadzenie danych!";
+            modelMap.put("infoNegative", infoNegative);
+            modelMap.put("tonerList", tonerRepo.findAll());
+        }else {
+            tonerRepo.save(new Toner(tonerName, points));
+            String infoPositive = "Dodano do bazy";
+            modelMap.put("infoPositive", infoPositive);
+            modelMap.put("tonerList", tonerRepo.findAll());
+        }
         return "toners";
     }
 
