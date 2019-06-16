@@ -30,13 +30,9 @@ public class OrderController {
     @RequestMapping("/orders")
     public String showOrders(ModelMap modelMap){
 
-        List<Orders> orderList = orderRepo.findAll();
-        List<Toner> tonerList = tonerRepo.findAll();
-        List<Worker> workerList = workerRepo.findAll();
-
-        modelMap.put("orderList", orderList);
-        modelMap.put("tonerList", tonerList);
-        modelMap.put("workerList", workerList);
+        modelMap.put("orderList", orderRepo.findAll());
+        modelMap.put("tonerList", tonerRepo.findAll());
+        modelMap.put("workerList", workerRepo.findAll());
 
         return "orders";
     }
@@ -49,14 +45,15 @@ public class OrderController {
 
         Worker worker = workerRepo.findById(workerID).get();
         Toner toner = tonerRepo.findById(tonerID).get();
-
         Orders orders = new Orders(worker.getWorkerID(), worker.getWorkerName(), toner.getTonerName(), date);
+
         orderRepo.save(orders);
-        List<Orders> ordersList = orderRepo.findAll();
+        String infoPositive = "Dodano do bazy";
 
-        modelMap.put("ordersList", ordersList);
+        modelMap.put("infoPositive", infoPositive);
+        modelMap.put("orderList", orderRepo.findAll());
 
-        return "redirect:/orders";
+        return "orders";
     }
 
     @GetMapping("/editOrder/{orderID}")
