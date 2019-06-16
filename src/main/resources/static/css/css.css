@@ -11,8 +11,17 @@
     height: 225px;
 }
 
-/* Demo Background */
-body{background:url(/images/bg/bg-6.png)}
+.linkButton {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.exitButton{
+    float: right;
+    margin-top: 1%;
+}
 
 /* Form Style */
 .form-horizontal{
