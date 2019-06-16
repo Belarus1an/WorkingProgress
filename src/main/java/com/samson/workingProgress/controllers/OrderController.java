@@ -94,7 +94,14 @@ public class OrderController {
     @RequestMapping("/orders/filter")
     public String findOrders(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date, ModelMap modelMap){
 
-        modelMap.put("orderList", orderRepo.findOrdersByDate(orderRepo.findAll(), date));
+        List<Orders> ordersList = orderRepo.findOrdersByDate(orderRepo.findAll(), date);
+        if (!ordersList.isEmpty()){
+            modelMap.put("orderList", ordersList);
+        } else {
+            String infoNegative = "Nic nie znaleziono!";
+            modelMap.put("infoNegative", infoNegative);
+        }
+
 
         return "orders";
     }
