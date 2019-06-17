@@ -27,7 +27,17 @@ public class OrderController {
     @Autowired
     private WorkerRepo workerRepo;
 
-    @RequestMapping("/orders")
+    @GetMapping("/")
+    public String index(ModelMap modelMap){
+
+        modelMap.put("orderList", orderRepo.findAll());
+        modelMap.put("tonerList", tonerRepo.findAll());
+        modelMap.put("workerList", workerRepo.findAll());
+
+        return "orders";
+    }
+
+    @GetMapping("/orders")
     public String showOrders(ModelMap modelMap){
 
         modelMap.put("orderList", orderRepo.findAll());
@@ -48,9 +58,8 @@ public class OrderController {
         Orders orders = new Orders(worker.getWorkerID(), worker.getWorkerName(), toner.getTonerName(), date);
 
         orderRepo.save(orders);
-        String infoPositive = "Dodano do bazy";
 
-        modelMap.put("infoPositive", infoPositive);
+        modelMap.put("infoPositive", "Dodano do bazy");
         modelMap.put("orderList", orderRepo.findAll());
 
         return "orders";
@@ -98,8 +107,7 @@ public class OrderController {
         if (!ordersList.isEmpty()){
             modelMap.put("orderList", ordersList);
         } else {
-            String infoNegative = "Nic nie znaleziono!";
-            modelMap.put("infoNegative", infoNegative);
+            modelMap.put("infoNegative", "Nic nie znaleziono!");
         }
 
 

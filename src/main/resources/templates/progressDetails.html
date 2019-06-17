@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{'/'}">Strona główna<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{'/orders/'}">Zlecenia<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{'/workers/'}">Pracownicy<span class="sr-only">(current)</span></a>
@@ -26,10 +26,10 @@
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{'/toners/'}">Tonery<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{'/orders/'}">Zlecenia<span class="sr-only">(current)</span></a>
-            </li>
         </ul>
+        <div class="exitButton rowImg mr-2">
+            <a href="/registration"><input type="image" value="Sign Out" th:src="@{'/img/user.png'}"/></a>
+        </div>
         <div class="exitButton rowImg">
             <form th:action="@{/logout}" method="post">
                 <input type="image" value="Sign Out" th:src="@{'/img/exit.png'}"/>
@@ -76,13 +76,11 @@
     <div class="px-5 py-3">
         <table class="table table-striped">
             <tr>
-                <th scope="col">orderID</th>
-                <th scope="col">workerName</th>
-                <th scope="col">tonerName</th>
-                <th scope="col">date</th>
+                <th scope="col">Imię i nazwisko</th>
+                <th scope="col">Model</th>
+                <th scope="col">Data</th>
             </tr>
             <tr scope="col" th:each ="orders : ${ordersListProgress}">
-                <td th:utext="${orders.orderID}">...</td>
                 <td th:utext="${orders.workerName}">...</td>
                 <td th:utext="${orders.tonerName}">...</td>
                 <td th:utext="${#dates.format(orders.date, 'dd-MMM-yyyy')}">...</td>

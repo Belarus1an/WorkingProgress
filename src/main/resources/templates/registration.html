@@ -22,18 +22,15 @@
                 <a class="nav-link" th:href="@{'/toners/'}">Tonery<span class="sr-only">(current)</span></a>
             </li>
         </ul>
-        <div class="exitButton rowImg mr-2">
-            <a href="/registration"><input type="image" value="Sign Out" th:src="@{'/img/user.png'}"/></a>
-        </div>
     </div>
 </nav>
 
 <div class="container">
-    <div class="row">
+    <div class="row mb-3">
 
         <div class="col-md-offset-3 col-md-6 mx-auto">
-            <form class="form-horizontal" th:action="@{/login}" method="post">
-                <span class="heading">Logowanie</span>
+            <form class="form-horizontal" th:action="@{/registration}" method="post">
+                <span class="heading">Rejestracja użytkownika</span>
 
                 <div class="form-group">
                     <input type="email" name="username" class="form-control" id="inputEmail" placeholder="Email">
@@ -50,8 +47,13 @@
         </div>
 
     </div><!-- /.row -->
-</div><!-- /.container -->
 
+    <div class="m-auto w-50">
+        <div th:if="${infoNegative}" th:text="${infoNegative}" class="alert alert-danger" role="alert"></div>
+        <div th:if="${infoPositive}" th:text="${infoPositive}" class="alert alert-success" role="alert"></div>
+    </div>
+
+</div><!-- /.container -->
 
 </body>
 </html>
