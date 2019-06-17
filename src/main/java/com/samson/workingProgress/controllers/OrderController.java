@@ -61,6 +61,8 @@ public class OrderController {
 
         modelMap.put("infoPositive", "Dodano do bazy");
         modelMap.put("orderList", orderRepo.findAll());
+        modelMap.put("tonerList", tonerRepo.findAll());
+        modelMap.put("workerList", workerRepo.findAll());
 
         return "orders";
     }
