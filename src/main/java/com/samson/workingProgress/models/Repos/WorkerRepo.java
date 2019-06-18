@@ -11,7 +11,7 @@ public interface WorkerRepo extends JpaRepository<Worker, Integer> {
 
    default boolean checkWorkerPesel(String pesel, List<Worker> workerList){
 
-       if (pesel.length() != 12){
+       if (pesel.length() != 11){
            return false;
        } else {
            for (Worker workerValue: workerList){
