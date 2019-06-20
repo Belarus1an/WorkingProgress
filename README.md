@@ -2,7 +2,7 @@
 
 📂 [demo-working-progress.herokuapp.com](http://demo-working-progress.herokuapp.com)
 
-Ten projekt jest demonstracją moich umiejętności programowania w Jawie przy użyciu Spring Framework.  Na tym etapie aplikacja nie podlega komercyjnemu wykorzystaniu, bo potrzebuje pewnego wyrafinowania.  Aplikacja skierowana jest do użytkownika, który nie ma specjalnej wiedzy w dziedzinie technologii informatycznych. 
+Ten projekt jest demonstracją moich umiejętności programowania w Jawie przy użyciu Spring Framework.  Na tym etapie aplikacja nie podlega komercyjnemu wykorzystaniu, ponieważ potrzebuje pewnego wyrafinowania.  Aplikacja skierowana jest do użytkownika, który nie ma specjalnej wiedzy w dziedzinie technologii informatycznych. 
 
  Zadaniem technicznym projektu jest stworzenie aplikacji internetowej, która automatyzuje rejestrowanie pracy wykonywanej w serwisie w celu naprawy tonerów i obliczania wynagrodzenia pracownika przez określony czas.
 
